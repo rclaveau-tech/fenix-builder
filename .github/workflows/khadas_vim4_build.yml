@@ -16,11 +16,9 @@ jobs:
           repository: 'rclaveau-tech/fenix'
           ref: 'rtm'
 
-      - name: Set environement variable for the build
-        run: 'source env/setenv.sh -q -s  KHADAS_BOARD=VIM4 LINUX=rtm UBOOT=2019.01 DISTRIBUTION=Ubuntu DISTRIB_RELEASE=noble DISTRIB_RELEASE_VERSION=24.04 DISTRIB_TYPE=server DISTRIB_ARCH=arm64 INSTALL_TYPE=SD-USB COMPRESS_IMAGE=yes'
-
-      - name: Make debian packages
+      - name: Set environement variable for the build and make the debian packages
         run: |
+          . env/setenv.sh -q -s  KHADAS_BOARD=VIM4 LINUX=rtm UBOOT=2019.01 DISTRIBUTION=Ubuntu DISTRIB_RELEASE=noble DISTRIB_RELEASE_VERSION=24.04 DISTRIB_TYPE=server DISTRIB_ARCH=arm64 INSTALL_TYPE=SD-USB COMPRESS_IMAGE=yes
           make kernel-deb
 
       - name: Upload the new packages built
