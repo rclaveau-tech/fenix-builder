@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: numbqq/fenix:latest
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          repository: 'rclaveau-tech/fenix'
+          ref: 'rtm'
+
+      - name: Set environement variable for the build
+        run: 'source env/setenv.sh -q -s  KHADAS_BOARD=VIM4 LINUX=rtm UBOOT=2019.01 DISTRIBUTION=Ubuntu DISTRIB_RELEASE=noble DISTRIB_RELEASE_VERSION=24.04 DISTRIB_TYPE=server DISTRIB_ARCH=arm64 INSTALL_TYPE=SD-USB COMPRESS_IMAGE=yes'
+
+      - name: Make debian packages
+        run: |
+          make kernel-deb
+
+      - name: Upload the new packages built
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          path: build/images/*
