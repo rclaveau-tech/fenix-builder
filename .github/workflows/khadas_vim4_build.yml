@@ -33,7 +33,7 @@ jobs:
         run: |
           dpkg --add-architecture arm64
           apt update
-          apt install -y libdw-dev libssl-dev libssl-dev:arm64
+          apt install -y libdw-dev libssl-dev libssl-dev:arm64 libc6-dev libc6-dev:arm64
 
       - name: Set environement variable for the build and make the debian packages
         run: |
