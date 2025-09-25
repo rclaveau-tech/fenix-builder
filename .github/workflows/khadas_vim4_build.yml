@@ -20,6 +20,7 @@ jobs:
         run: |
           . env/setenv.sh -q -s  KHADAS_BOARD=VIM4 LINUX=rtm UBOOT=2019.01 DISTRIBUTION=Ubuntu DISTRIB_RELEASE=noble DISTRIB_RELEASE_VERSION=24.04 DISTRIB_TYPE=server DISTRIB_ARCH=arm64 INSTALL_TYPE=SD-USB COMPRESS_IMAGE=yes
           make kernel-deb
+        shell: bash
 
       - name: Upload the new packages built
         uses: actions/upload-artifact@v4.6.2
