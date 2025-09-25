@@ -17,7 +17,10 @@ jobs:
           ref: 'rtm'
 
       - name: Add dependencies
-        run: apt install libdw-dev libssl-dev libssl-dev:arm64
+        run: |
+          dpkg --add-architecture arm64
+          apt update
+          apt install libdw-dev libssl-dev libssl-dev:arm64
 
       - name: Set environement variable for the build and make the debian packages
         run: |
