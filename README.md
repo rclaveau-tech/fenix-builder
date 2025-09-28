@@ -16,4 +16,4 @@
 | GPU HW Accel | :white_check_mark: |
 | NPU Adla | :white_check_mark: |
 
-* Need to get mac address from efuse
+\* Ethernet Partial, because need to get mac address from efuse
