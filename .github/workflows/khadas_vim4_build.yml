@@ -18,21 +18,22 @@ jobs:
 
       - name: Fix sources list
         run: |
+          rm -f /etc/apt/sources.list.d/ubuntu.sources
           echo "\
-          deb [arch=amd64,i386] http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
-          deb [arch=amd64,i386] http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
-          deb [arch=amd64,i386] http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
-          deb [arch=amd64,i386] http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
-          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy main restricted universe multiverse
-          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy-updates main restricted universe multiverse
-          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy-backports main restricted universe multiverse
-          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy-security main restricted universe multiverse
+          deb [arch=amd64,i386] http://archive.ubuntu.com/ubuntu/ noble main restricted universe multiverse
+          deb [arch=amd64,i386] http://archive.ubuntu.com/ubuntu/ noble-updates main restricted universe multiverse
+          deb [arch=amd64,i386] http://archive.ubuntu.com/ubuntu/ noble-backports main restricted universe multiverse
+          deb [arch=amd64,i386] http://security.ubuntu.com/ubuntu/ noble-security main restricted universe multiverse
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble main restricted universe multiverse
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-updates main restricted universe multiverse
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-backports main restricted universe multiverse
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-security main restricted universe multiverse
           " > /etc/apt/sources.list
 
       - name: Add dependencies
         run: |
           dpkg --add-architecture arm64
-          apt update
+          apt update && apt upgrade -y
           apt install -y libdw-dev libssl-dev libssl-dev:arm64 libc6-dev libc6-dev:arm64
 
       - name: Set environement variable for the build and make the debian packages
